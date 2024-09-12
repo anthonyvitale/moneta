@@ -57,6 +57,11 @@ func (s *Store) Ping(ctx context.Context) error {
 
 // UploadImage uploads an object to the backing blob storage.
 func (s *Store) UploadImage(ctx context.Context, key string, body io.Reader) error {
+	return s.UploadImageWithMetadata(ctx, key, body, map[string]string{})
+}
+
+// UploadImageWithMetadata uploads an object with metadata to the backing blob storage.
+func (s *Store) UploadImageWithMetadata(ctx context.Context, key string, body io.Reader, metadata map[string]string) error {
 	if key == "" {
 		return errors.New("key cannot be empty")
 	}
@@ -65,9 +70,10 @@ func (s *Store) UploadImage(ctx context.Context, key string, body io.Reader) err
 	}
 
 	_, err := s.client.PutObject(ctx, &s3.PutObjectInput{
-		Bucket: aws.String(s.bucket),
-		Key:    aws.String(key),
-		Body:   body,
+		Bucket:   aws.String(s.bucket),
+		Key:      aws.String(key),
+		Body:     body,
+		Metadata: metadata,
 	}, s3.WithAPIOptions(s.apiOpts...))
 
 	return err

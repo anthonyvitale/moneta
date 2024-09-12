@@ -143,9 +143,10 @@ func (suite *StoreSuite) Test_StoreUploadImage() {
 				f.s3Mock.EXPECT().PutObject(
 					suite.ctx,
 					&s3.PutObjectInput{
-						Bucket: aws.String(suite.bucket),
-						Key:    aws.String("key_1"),
-						Body:   bytes.NewBufferString("my_body"),
+						Bucket:   aws.String(suite.bucket),
+						Key:      aws.String("key_1"),
+						Body:     bytes.NewBufferString("my_body"),
+						Metadata: map[string]string{},
 					},
 					gomock.Any(),
 				).Return(nil, nil)
@@ -162,9 +163,10 @@ func (suite *StoreSuite) Test_StoreUploadImage() {
 				f.s3Mock.EXPECT().PutObject(
 					suite.ctx,
 					&s3.PutObjectInput{
-						Bucket: aws.String(suite.bucket),
-						Key:    aws.String("key_1"),
-						Body:   bytes.NewBufferString("my_body"),
+						Bucket:   aws.String(suite.bucket),
+						Key:      aws.String("key_1"),
+						Body:     bytes.NewBufferString("my_body"),
+						Metadata: map[string]string{},
 					},
 					gomock.Any(),
 				).Return(nil, assert.AnError)

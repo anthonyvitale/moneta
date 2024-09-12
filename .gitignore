@@ -2,7 +2,6 @@
 coverage.out
 .work
 dist
-mocks/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,vim,linux,go,zsh
