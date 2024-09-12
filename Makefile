@@ -12,15 +12,15 @@ tidy: auto
 
 .PHONY: auto
 auto:
-	go generate -x ./...
+	go generate -x .
 
 .PHONY: test
 test: auto
-	go test ./...
+	go test .
 
 .PHONY: cov
 cov: auto
-	go test -coverprofile=coverage.out ./...
+	go test -coverprofile=coverage.out .
 	go tool cover -html=coverage.out
 
 .PHONY: clean
